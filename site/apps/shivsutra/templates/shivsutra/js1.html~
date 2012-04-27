@@ -1,0 +1,53 @@
+<html>  
+    <head>  
+        <title>Raphael Play</title>  
+        <script type="text/javascript" src="{{ STATIC_URL }}js/raphael.js"></script>  
+        <script type="text/javascript" src="{{ STATIC_URL }}js/ss.js"></script>  
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>  
+        <style type="text/css">  
+            #canvas_container {  
+                width: 500px;  
+                border: 1px solid #aaa;  
+            }  
+        </style>  
+    </head>  
+    <body>  
+        <input id="akshar" type="text" name="char" value="">
+        <div id="canvas_container"></div>  
+    </body>  
+    <script type="text/javascript">$(document).ready(function() {
+        var user_input = '';
+        var sutras = [ ['अ', 'इ', 'उ', ' ण्'], ['ऋ', 'ऌ',  'क्']];   
+        var akshar = {}
+        var char_spacing = 70;
+        var line_spacing = 70;
+        var attr = {font:'12px Verdana','font-size':48,'text-anchor':'start'};
+     
+     
+            var paper = new Raphael('canvas_container', 500, 500);
+            
+            for (i = 0; i < sutras.length; i++) {
+                sutra = sutras[i];
+                for (j = 0; j < sutra.length; j++) {
+                    var text = paper.text((j+1)*char_spacing, (i+1)*line_spacing,sutra[j]).attr(attr); 
+                    if (j == sutra.length - 1) {
+                        text.attr({fill: '#f00'});
+                    }
+                    akshar[sutra[j]] = text;
+                 }
+             }
+    //var circ = paper.circle(250, 250, 20).attr({fill: '#ff0'});
+   
+    $('#akshar').keypress(function() {
+           if ($( '#akshar').val() !=  user_input ) {
+               akshar_badal();
+               user_input = $( '#akshar').val();
+           }                
+        });         
+          
+});
+ function akshar_badal() {
+      alert('Handler for .change() called.');
+}
+    </script>
+</html>  
